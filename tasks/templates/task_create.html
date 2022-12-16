@@ -1,0 +1,16 @@
+{% extends 'layauts/base.html' %} {% block content %} {{ error }}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form action="/tasks/create/" method="POST" class="card card-body mt-5">
+                <h1>Create TASK</h1>
+                {% csrf_token %} {{form.as_p}}
+                <button class="btn btn-primary">Create</button>
+                <p class="pt-2 text-danger">{{ error }}</p>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

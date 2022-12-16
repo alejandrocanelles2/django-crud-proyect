@@ -1,0 +1,44 @@
+{% extends 'layauts/base.html' %} {% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-4">
+
+            <h1 class="text-center display-5 py-2">Tasks Pending</h1>
+            <ul class="list-group">
+                {% for task in tasks %} {% if task.datecomplited is None %}
+                <a href="{% url 'task_detail' task.id %}" class="list-group-item">
+                    <header class="d-flex justify-content-between">
+                        {% if task.important %}
+                        <h1 class="fw-bold text-success">{{ task.title }}</h1>
+                        {% else %}
+                        <h1 class="fw-bold">{{ task.title }}</h1>
+                        {% endif %}
+                        <p>{{task.created}}</p>
+                    </header>
+                    <p>{{ task.description }}</p>
+                </a> {% endif %}{% endfor %}
+            </ul>
+
+            <h1 class="text-center display-5 py-2">Tasks Complete</h1>
+            <ul class="list-group">
+                {% for task in tasks %} {% if task.datecomplited is not None %}
+                <a href="{% url 'task_detail' task.id %}" class="list-group-item">
+                    <header class="d-flex justify-content-between">
+                        {% if task.important %}
+                        <h1 class="fw-bold text-success">{{ task.title }}</h1>
+                        {% else %}
+                        <h1 class="fw-bold">{{ task.title }}</h1>
+                        {% endif %}
+                        <p>{{task.created}}</p>
+                    </header>
+                    <p>{{ task.description }}</p>
+                    <small>Completed at: {{ task.datecomplited }}</small>
+                </a> {% endif %}{% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}
